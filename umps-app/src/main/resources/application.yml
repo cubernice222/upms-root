@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: umps
+zookeeper:
+  hosts: 101.132.113.199:2181,101.132.113.199:2182,101.132.113.199:2183

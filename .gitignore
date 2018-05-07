@@ -10,3 +10,4 @@
 ### build folder ###
 target/
 build/
+out/
