@@ -1,0 +1,4 @@
+rootProject.name = 'upms-root'
+include 'umps-facade'
+include 'umps-app'
+
