@@ -33,7 +33,7 @@ public class Swagger2Config {
                 .description("UPMS(用户权限管理系统)")
                 .termsOfServiceUrl("https://proj.cuber.org/upms")
                 .contact(contact)
-                .version("1.0")
+                .version("1.0-SNAPSHOT")
                 .build();
     }
 

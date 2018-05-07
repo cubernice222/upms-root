@@ -82,7 +82,7 @@ CREATE TABLE t_rc_user(
   user_name VARCHAR(255),
   password VARCHAR(2048),
   salt VARCHAR(1024),
-  fullName VARCHAR(256),
+  full_name VARCHAR(256),
   birthday TIMESTAMP WITHOUT TIME ZONE,
   user_scope VARCHAR(64),
   sex VARCHAR(2),
@@ -101,7 +101,7 @@ comment on column t_rc_user.avatar is '头像url';
 comment on column t_rc_user.user_name is '登录名称';
 comment on column t_rc_user.password is '登录密码';
 comment on column t_rc_user.salt is '加密 salt';
-comment on column t_rc_user.name is '名称';
+comment on column t_rc_user.full_name is '名称';
 comment on column t_rc_user.birthday is '生日';
 comment on column t_rc_user.user_scope is '用户系统';
 comment on column t_rc_user.sex is '性别';
