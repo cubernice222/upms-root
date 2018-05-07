@@ -43,7 +43,7 @@ public class VertxComp {
     }
 
     @PostConstruct
-    public void configVertx() throws Exception{
+    public void init() throws Exception{
         VertxOptions options = new VertxOptions()
                 .setClustered(true)
                 .setClusterManager(createZkClusterManager());
@@ -69,7 +69,7 @@ public class VertxComp {
     void close() throws ExecutionException, InterruptedException {
         CompletableFuture<Void> future = new CompletableFuture<>();
         vertx.close(ar -> {
-            logger.info("关闭vert.x组件完毕");
+            logger.info("关闭vert.x组件");
             future.complete(null);
         });
         future.get();
