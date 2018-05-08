@@ -26,12 +26,12 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         Contact contact
-                = new Contact("cuber","https://about.cuber.org/me","190231170@qq.com");
+                = new Contact("cuber","https:about.cuber.org/me","190231170@qq.com");
 
         return new ApiInfoBuilder()
                 .title("User Permissions Management System")
                 .description("UPMS(用户权限管理系统)")
-                .termsOfServiceUrl("https://proj.cuber.org/upms")
+                .termsOfServiceUrl("https:proj.cuber.org/upms")
                 .contact(contact)
                 .version("1.0-SNAPSHOT")
                 .build();

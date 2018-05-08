@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 
 @Component
-@ConfigurationProperties("datasource.conf")
+@ConfigurationProperties("datasource.config")
 public class DatabaseComp extends Properties {
 
     @Autowired
@@ -29,7 +29,10 @@ public class DatabaseComp extends Properties {
         config.put("idleTimeout",Long.parseLong(this.getProperty("idleTimeout")));
         io.vertx.reactivex.core.Vertx rxVertx = new io.vertx.reactivex.core.Vertx(vertx);
         JDBCClient jdbcClient = JDBCClient.createShared(rxVertx, config);
-        logger.info("数据库jdbcClient组件初始化完毕");
+        logger.info("据库jdbcClient组件初始化完毕");
+        jdbcClient.rxQuery("select 1 as count").subscribe(resultSet ->
+            logger.info("数据库初始化启动校验完毕:{}",resultSet)
+        );
         return jdbcClient;
     }
 }

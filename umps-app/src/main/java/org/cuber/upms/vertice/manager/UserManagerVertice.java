@@ -32,9 +32,9 @@ public class UserManagerVertice extends AbstractVerticle {
     public void stop(Future<Void> stopFuture) throws Exception {
         userMessageConsumer.unregister(asyncResult->{
             if(asyncResult.succeeded()){
-                logger.info("退出消费userManager consumer");
+                logger.info("退出消费userManager consumer 完成");
             }else{
-                logger.error("退出消费userManager异常",asyncResult.failed());
+                logger.error("退出消费userManager consumer 异常",asyncResult.failed());
             }
         });
     }

@@ -85,7 +85,7 @@ CREATE TABLE t_rc_user(
   full_name VARCHAR(256),
   birthday TIMESTAMP WITHOUT TIME ZONE,
   user_scope VARCHAR(64),
-  sex VARCHAR(2),
+  sex VARCHAR(64),
   email VARCHAR(255),
   phone VARCHAR(255),
   ding_user_id VARCHAR(255),
