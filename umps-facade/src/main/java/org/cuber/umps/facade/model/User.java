@@ -1,19 +1,30 @@
 package org.cuber.umps.facade.model;
 
 import io.vertx.codegen.annotations.DataObject;
+import org.cuber.umps.model.BaseModel;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "t_rc_user")
 @DataObject(generateConverter=true)
-public class User {
+@SequenceGenerator (name = "USER_ID_SEQ", sequenceName = "t_rc_user_user_id_seq", allocationSize = 1)
+public class User extends BaseModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_ID_SEQ")
     private Integer userId;
 
     private String avatar;
 
+    @Column(insertable = false)
     private String userName;
 
+    @Column(insertable = false)
     private String password;
 
+    @Column(insertable = false)
     private String salt;
 
     private String fullName;
@@ -36,9 +47,6 @@ public class User {
 
     private String operator;
 
-    private LocalDateTime updateTime;
-
-    private LocalDateTime createTime;
 
     public Integer getUserId() {
         return userId;
@@ -160,19 +168,4 @@ public class User {
         this.operator = operator;
     }
 
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
 }

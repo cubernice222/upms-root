@@ -1,17 +1,18 @@
 spring:
   application:
-    name: umps
-
-zookeeper:
-  hosts: 101.132.113.199:2181,101.132.113.199:2182,101.132.113.199:2183
-
-datasource:
-  config:
-    provider_class: io.vertx.ext.jdbc.spi.impl.HikariCPDataSourceProvider
-    jdbcUrl: jdbc:postgresql://172.168.3.19:5432/upms
-    driverClassName: org.postgresql.Driver
-    username: upms
+    name: upms
+  datasource:
+    hikari:
+      connection-init-sql: select 1
+      connection-timeout: 5000
+      idle-timeout: 300000
+      minimum-idle: 5
+    name: upms
     password: upms
-    connectionTimeout: 5000
-    idleTimeout: 30000
-    poolName: vertx-hikaricp
+    url: jdbc:postgresql://localhost:5432/upms
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    username: upms
+# 101.132.113.199:2181,101.132.113.199:2182,101.132.113.199:2183
+zookeeper:
+  hosts: 127.0.0.1:2181
