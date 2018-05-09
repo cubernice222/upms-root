@@ -1,6 +1,8 @@
-CREATE USER upms WITH PASSWORD 'upms';
-CREATE DATABASE upms OWNER upms;
-GRANT ALL PRIVILEGES ON DATABASE upms TO upms;
+CREATE USER upms WITH PASSWORD 'upms'; --创建用户
+CREATE DATABASE upms OWNER upms; --创建数据库并指明owner
+create schema upms authorization upms; --创建schema 并指明授权
+SET search_path TO upms; -- 设置默认schema
+ALTER database upms SET search_path TO upms; --设置数据库默认的schema
 
 CREATE TABLE t_rc_role(
   role_id SERIAL4 PRIMARY KEY NOT NULL , -- SERIAL4不但会生成主键,而且不需要insert into 带列
@@ -76,7 +78,7 @@ CREATE TABLE t_rc_role_menu(
   create_time TIMESTAMP WITHOUT TIME ZONE
 );
 
-CREATE TABLE t_rc_user(
+CREATE TABLE upms.t_rc_user(
   user_id SERIAL4 PRIMARY KEY NOT NULL , -- SERIAL4不但会生成主键,而且不需要insert into 带列
   avatar VARCHAR(1024),
   user_name VARCHAR(255),
