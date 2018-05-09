@@ -14,6 +14,12 @@
     </appenders>
     <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
     <loggers>
+        <logger name="io.ebean.SQL" level="TRACE">
+            <appender-ref ref="Console" />
+        </logger>
+        <logger name="io.ebean.TXN" level="TRACE">
+            <appender-ref ref="Console" />
+        </logger>
         <root level="INFO" additivity="false">
 		    <appender-ref ref="Console" />
         </root>

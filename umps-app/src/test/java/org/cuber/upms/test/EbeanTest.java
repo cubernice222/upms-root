@@ -1,5 +1,6 @@
 package org.cuber.upms.test;
 
+import io.ebean.Ebean;
 import io.ebean.EbeanServer;
 import org.cuber.upms.repo.domain.User;
 import org.cuber.upms.UpmsApplication;
