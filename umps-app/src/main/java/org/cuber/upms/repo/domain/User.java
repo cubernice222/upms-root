@@ -1,14 +1,12 @@
-package org.cuber.umps.facade.model;
+package org.cuber.upms.repo.domain;
 
-import io.vertx.codegen.annotations.DataObject;
-import org.cuber.umps.model.BaseModel;
+import org.cuber.repo.BaseModel;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "t_rc_user")
-@DataObject(generateConverter=true)
 @SequenceGenerator (name = "USER_ID_SEQ", sequenceName = "t_rc_user_user_id_seq", allocationSize = 1)
 public class User extends BaseModel {
 

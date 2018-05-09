@@ -1,4 +1,4 @@
-package org.cuber.umps.model;
+package org.cuber.repo;
 
 import io.ebean.Model;
 import io.ebean.annotation.CreatedTimestamp;

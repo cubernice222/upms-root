@@ -1,7 +1,7 @@
-package org.cuber.umps.test;
+package org.cuber.upms.test;
 
 import io.ebean.EbeanServer;
-import org.cuber.umps.facade.model.User;
+import org.cuber.upms.repo.domain.User;
 import org.cuber.upms.UpmsApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +24,7 @@ public class EbeanTest {
     @Test
     public void testInsert(){
 
-        User user = new User();
+        User user = ebeanServer.createEntityBean(User.class);
         user.setAvatar("https://about.cuber.org/me/avatar.png");
         user.setBirthday(LocalDateTime.of(1988,2,22,21,30));
         user.setCorpNumber("0222");
@@ -38,5 +38,6 @@ public class EbeanTest {
         user.setWechatUserId("empty4now");
         ebeanServer.save(user);
         logger.info("I like to see");
+
     }
 }

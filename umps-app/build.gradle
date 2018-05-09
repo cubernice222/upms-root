@@ -10,10 +10,12 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.ebean:ebean-gradle-plugin:11.9.1"
     }
 }
 
 apply plugin: 'java'
+apply plugin: 'io.ebean'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
@@ -38,8 +40,13 @@ dependencies {
     compile 'org.postgresql:postgresql:42.2.2'
     compile 'io.springfox:springfox-swagger2:2.8.0'
     compile 'io.springfox:springfox-swagger-ui:2.8.0'
+    compile group: 'io.ebean', name: 'ebean', version: '11.15.5'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
+}
+
+ebean {
+    debugLevel = 1 //1 - 9
 }
 
 configurations {
