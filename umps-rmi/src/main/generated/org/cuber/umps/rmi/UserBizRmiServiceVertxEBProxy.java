@@ -32,8 +32,10 @@ import java.util.function.Function;
 import io.vertx.serviceproxy.ProxyHelper;
 import io.vertx.serviceproxy.ServiceException;
 import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
+import org.cuber.umps.bo.UserPagingResp;
 import org.cuber.umps.rmi.UserBizRmiService;
 import org.cuber.umps.bo.SeekUserResp;
+import org.cuber.umps.bo.UserPagingReq;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import org.cuber.umps.bo.SeekUserReq;
@@ -65,9 +67,9 @@ public class UserBizRmiServiceVertxEBProxy implements UserBizRmiService {
   }
 
   @Override
-  public UserBizRmiService seekUser(SeekUserReq req, Handler<AsyncResult<SeekUserResp>> seekHandler) {
+  public UserBizRmiService seekUser(SeekUserReq req, Handler<AsyncResult<SeekUserResp>> handler) {
     if (closed) {
-    seekHandler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
+    handler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return this;
     }
     JsonObject _json = new JsonObject();
@@ -76,9 +78,29 @@ public class UserBizRmiServiceVertxEBProxy implements UserBizRmiService {
     _deliveryOptions.addHeader("action", "seekUser");
     _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
       if (res.failed()) {
-        seekHandler.handle(Future.failedFuture(res.cause()));
+        handler.handle(Future.failedFuture(res.cause()));
       } else {
-        seekHandler.handle(Future.succeededFuture(res.result().body() == null ? null : new SeekUserResp(res.result().body())));
+        handler.handle(Future.succeededFuture(res.result().body() == null ? null : new SeekUserResp(res.result().body())));
+                      }
+    });
+    return this;
+  }
+
+  @Override
+  public UserBizRmiService pagingUser(UserPagingReq req, Handler<AsyncResult<UserPagingResp>> handler) {
+    if (closed) {
+    handler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
+      return this;
+    }
+    JsonObject _json = new JsonObject();
+    _json.put("req", req == null ? null : req.toJson());
+    DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
+    _deliveryOptions.addHeader("action", "pagingUser");
+    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
+      if (res.failed()) {
+        handler.handle(Future.failedFuture(res.cause()));
+      } else {
+        handler.handle(Future.succeededFuture(res.result().body() == null ? null : new UserPagingResp(res.result().body())));
                       }
     });
     return this;

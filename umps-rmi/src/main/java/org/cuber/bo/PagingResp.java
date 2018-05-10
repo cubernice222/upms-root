@@ -1,24 +1,12 @@
 package org.cuber.bo;
 
-import java.util.List;
-
-public abstract class PagingResp<T> extends BaseResp{
-
-    protected List<T> records;
+public abstract class PagingResp extends BaseResp{
 
     protected int pageNumber;
 
     protected int total;
 
     protected int pageSize;
-
-    public List<T> getRecords() {
-        return records;
-    }
-
-    public void setRecords(List<T> records) {
-        this.records = records;
-    }
 
     public int getPageNumber() {
         return pageNumber;

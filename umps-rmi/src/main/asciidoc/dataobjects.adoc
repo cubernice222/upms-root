@@ -58,3 +58,38 @@
 |[[wechatUserId]]`wechatUserId`|`String`|-
 |===
 
+[[UserPagingReq]]
+== UserPagingReq
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[bizDesc]]`bizDesc`|`String`|-
+|[[consumer]]`consumer`|`String`|-
+|[[fullName]]`fullName`|`String`|-
+|[[pageNumber]]`pageNumber`|`Number (int)`|-
+|[[pageSize]]`pageSize`|`Number (int)`|-
+|[[producer]]`producer`|`String`|-
+|[[traceId]]`traceId`|`String`|-
+|[[userName]]`userName`|`String`|-
+|===
+
+[[UserPagingResp]]
+== UserPagingResp
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[consumer]]`consumer`|`String`|-
+|[[pageNumber]]`pageNumber`|`Number (int)`|-
+|[[pageSize]]`pageSize`|`Number (int)`|-
+|[[producer]]`producer`|`String`|-
+|[[records]]`records`|`Array of link:dataobjects.html#UserBo[UserBo]`|-
+|[[resultDesc]]`resultDesc`|`String`|-
+|[[total]]`total`|`Number (int)`|-
+|===
+
