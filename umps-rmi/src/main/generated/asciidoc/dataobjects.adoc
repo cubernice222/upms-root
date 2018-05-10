@@ -1,0 +1,58 @@
+= Cheatsheets
+
+[[SeekUserReq]]
+== SeekUserReq
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[bizDesc]]`bizDesc`|`String`|-
+|[[consumer]]`consumer`|`String`|-
+|[[dingUserId]]`dingUserId`|`String`|-
+|[[email]]`email`|`String`|-
+|[[phone]]`phone`|`String`|-
+|[[producer]]`producer`|`String`|-
+|[[traceId]]`traceId`|`String`|-
+|[[userName]]`userName`|`String`|-
+|[[wechatUserId]]`wechatUserId`|`String`|-
+|===
+
+[[SeekUserResp]]
+== SeekUserResp
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[consumer]]`consumer`|`String`|-
+|[[producer]]`producer`|`String`|-
+|[[resultDesc]]`resultDesc`|`String`|-
+|[[userBo]]`userBo`|`link:dataobjects.html#UserBo[UserBo]`|-
+|===
+
+[[UserBo]]
+== UserBo
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[avatar]]`avatar`|`String`|-
+|[[corpNumber]]`corpNumber`|`String`|-
+|[[dingUserId]]`dingUserId`|`String`|-
+|[[email]]`email`|`String`|-
+|[[fullName]]`fullName`|`String`|-
+|[[operator]]`operator`|`String`|-
+|[[password]]`password`|`String`|-
+|[[phone]]`phone`|`String`|-
+|[[sex]]`sex`|`String`|-
+|[[status]]`status`|`String`|-
+|[[userId]]`userId`|`Number (Integer)`|-
+|[[userName]]`userName`|`String`|-
+|[[wechatUserId]]`wechatUserId`|`String`|-
+|===
+

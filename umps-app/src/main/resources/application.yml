@@ -14,4 +14,4 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     username: upms
 zookeeper:
-  hosts: 01.132.113.199:2181,101.132.113.199:2182,101.132.113.199:2183
+  hosts: 101.132.113.199:2181,101.132.113.199:2182,101.132.113.199:2183
