@@ -30,6 +30,9 @@ public class UserBoConverter {
     if (json.getValue("avatar") instanceof String) {
       obj.setAvatar((String)json.getValue("avatar"));
     }
+    if (json.getValue("consumer") instanceof String) {
+      obj.setConsumer((String)json.getValue("consumer"));
+    }
     if (json.getValue("corpNumber") instanceof String) {
       obj.setCorpNumber((String)json.getValue("corpNumber"));
     }
@@ -50,6 +53,9 @@ public class UserBoConverter {
     }
     if (json.getValue("phone") instanceof String) {
       obj.setPhone((String)json.getValue("phone"));
+    }
+    if (json.getValue("producer") instanceof String) {
+      obj.setProducer((String)json.getValue("producer"));
     }
     if (json.getValue("sex") instanceof String) {
       obj.setSex((String)json.getValue("sex"));
@@ -72,6 +78,9 @@ public class UserBoConverter {
     if (obj.getAvatar() != null) {
       json.put("avatar", obj.getAvatar());
     }
+    if (obj.getConsumer() != null) {
+      json.put("consumer", obj.getConsumer());
+    }
     if (obj.getCorpNumber() != null) {
       json.put("corpNumber", obj.getCorpNumber());
     }
@@ -92,6 +101,9 @@ public class UserBoConverter {
     }
     if (obj.getPhone() != null) {
       json.put("phone", obj.getPhone());
+    }
+    if (obj.getProducer() != null) {
+      json.put("producer", obj.getProducer());
     }
     if (obj.getSex() != null) {
       json.put("sex", obj.getSex());

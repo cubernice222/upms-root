@@ -11,6 +11,14 @@ import org.cuber.umps.bo.SeekUserResp;
 @VertxGen
 @ProxyGen
 public interface UserBizRmiService {
+    /**
+     *
+     * @param req
+     * @param seekHandler
+     * @return
+     */
     @Fluent
     UserBizRmiService seekUser(SeekUserReq req, Handler<AsyncResult<SeekUserResp>> seekHandler);
+
+
 }

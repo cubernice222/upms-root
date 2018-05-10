@@ -42,6 +42,7 @@
 |===
 ^|Name | Type ^| Description
 |[[avatar]]`avatar`|`String`|-
+|[[consumer]]`consumer`|`String`|-
 |[[corpNumber]]`corpNumber`|`String`|-
 |[[dingUserId]]`dingUserId`|`String`|-
 |[[email]]`email`|`String`|-
@@ -49,6 +50,7 @@
 |[[operator]]`operator`|`String`|-
 |[[password]]`password`|`String`|-
 |[[phone]]`phone`|`String`|-
+|[[producer]]`producer`|`String`|-
 |[[sex]]`sex`|`String`|-
 |[[status]]`status`|`String`|-
 |[[userId]]`userId`|`Number (Integer)`|-
