@@ -5,10 +5,7 @@ import io.vertx.codegen.annotations.ProxyGen;
 import io.vertx.codegen.annotations.VertxGen;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
-import org.cuber.umps.bo.SeekUserReq;
-import org.cuber.umps.bo.SeekUserResp;
-import org.cuber.umps.bo.UserPagingReq;
-import org.cuber.umps.bo.UserPagingResp;
+import org.cuber.umps.bo.*;
 
 @VertxGen
 @ProxyGen
@@ -24,6 +21,9 @@ public interface UserBizRmiService {
 
     @Fluent
     UserBizRmiService pagingUser(UserPagingReq req, Handler<AsyncResult<UserPagingResp>> handler);
+
+    @Fluent
+    UserBizRmiService updateUser(UserReq req, Handler<AsyncResult<UpdateUserResp>> handler);
 
 
 }

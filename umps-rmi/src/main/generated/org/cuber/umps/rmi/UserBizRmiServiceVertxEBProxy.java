@@ -33,9 +33,11 @@ import io.vertx.serviceproxy.ProxyHelper;
 import io.vertx.serviceproxy.ServiceException;
 import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
 import org.cuber.umps.bo.UserPagingResp;
+import org.cuber.umps.bo.UpdateUserResp;
 import org.cuber.umps.rmi.UserBizRmiService;
 import org.cuber.umps.bo.SeekUserResp;
 import org.cuber.umps.bo.UserPagingReq;
+import org.cuber.umps.bo.UserReq;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import org.cuber.umps.bo.SeekUserReq;
@@ -101,6 +103,26 @@ public class UserBizRmiServiceVertxEBProxy implements UserBizRmiService {
         handler.handle(Future.failedFuture(res.cause()));
       } else {
         handler.handle(Future.succeededFuture(res.result().body() == null ? null : new UserPagingResp(res.result().body())));
+                      }
+    });
+    return this;
+  }
+
+  @Override
+  public UserBizRmiService updateUser(UserReq req, Handler<AsyncResult<UpdateUserResp>> handler) {
+    if (closed) {
+    handler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
+      return this;
+    }
+    JsonObject _json = new JsonObject();
+    _json.put("req", req == null ? null : req.toJson());
+    DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
+    _deliveryOptions.addHeader("action", "updateUser");
+    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
+      if (res.failed()) {
+        handler.handle(Future.failedFuture(res.cause()));
+      } else {
+        handler.handle(Future.succeededFuture(res.result().body() == null ? null : new UpdateUserResp(res.result().body())));
                       }
     });
     return this;

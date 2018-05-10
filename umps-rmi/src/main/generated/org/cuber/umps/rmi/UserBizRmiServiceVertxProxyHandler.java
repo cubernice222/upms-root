@@ -40,9 +40,11 @@ import io.vertx.serviceproxy.ProxyHandler;
 import io.vertx.serviceproxy.ServiceException;
 import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
 import org.cuber.umps.bo.UserPagingResp;
+import org.cuber.umps.bo.UpdateUserResp;
 import org.cuber.umps.rmi.UserBizRmiService;
 import org.cuber.umps.bo.SeekUserResp;
 import org.cuber.umps.bo.UserPagingReq;
+import org.cuber.umps.bo.UserReq;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import org.cuber.umps.bo.SeekUserReq;
@@ -134,6 +136,20 @@ public class UserBizRmiServiceVertxProxyHandler extends ProxyHandler {
         }
         case "pagingUser": {
           service.pagingUser(json.getJsonObject("req") == null ? null : new org.cuber.umps.bo.UserPagingReq(json.getJsonObject("req")), res -> {
+            if (res.failed()) {
+              if (res.cause() instanceof ServiceException) {
+                msg.reply(res.cause());
+              } else {
+                msg.reply(new ServiceException(-1, res.cause().getMessage()));
+              }
+            } else {
+              msg.reply(res.result() == null ? null : res.result().toJson());
+            }
+         });
+          break;
+        }
+        case "updateUser": {
+          service.updateUser(json.getJsonObject("req") == null ? null : new org.cuber.umps.bo.UserReq(json.getJsonObject("req")), res -> {
             if (res.failed()) {
               if (res.cause() instanceof ServiceException) {
                 msg.reply(res.cause());

@@ -33,6 +33,20 @@
 |[[userBo]]`userBo`|`link:dataobjects.html#UserBo[UserBo]`|-
 |===
 
+[[UpdateUserResp]]
+== UpdateUserResp
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[consumer]]`consumer`|`String`|-
+|[[producer]]`producer`|`String`|-
+|[[resultDesc]]`resultDesc`|`String`|-
+|[[update]]`update`|`Boolean`|-
+|===
+
 [[UserBo]]
 == UserBo
 
@@ -91,5 +105,20 @@
 |[[records]]`records`|`Array of link:dataobjects.html#UserBo[UserBo]`|-
 |[[resultDesc]]`resultDesc`|`String`|-
 |[[total]]`total`|`Number (int)`|-
+|===
+
+[[UserReq]]
+== UserReq
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[bizDesc]]`bizDesc`|`String`|-
+|[[consumer]]`consumer`|`String`|-
+|[[producer]]`producer`|`String`|-
+|[[traceId]]`traceId`|`String`|-
+|[[userBo]]`userBo`|`link:dataobjects.html#UserBo[UserBo]`|-
 |===
 
