@@ -3,7 +3,9 @@ package org.cuber.upms.repo.mapper;
 import io.ebean.EbeanServer;
 import io.ebean.ExpressionList;
 import org.apache.commons.lang3.StringUtils;
+import org.cuber.bo.PageRecords;
 import org.cuber.bo.PageReq;
+import org.cuber.repo.mapper.MapperUtils;
 import org.cuber.upms.repo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -46,7 +48,7 @@ public class UserMapper {
         ebeanServer.save(user);
     }
 
-    public void queryList(User user, PageReq pageReq){
+    public PageRecords<User> queryList(User user, PageReq pageReq){
         ExpressionList<User> expressionList = ebeanServer.find(User.class).where();
 
         if(StringUtils.isNotEmpty(user.getUserName())){
@@ -56,9 +58,10 @@ public class UserMapper {
         if(StringUtils.isNotEmpty(user.getFullName())){
             expressionList.like("fullName", "%" + user.getFullName()+ "%");
         }
-
-
-
+        return MapperUtils.findList(expressionList,pageReq);
     }
 
+    public PageRecords<User> queryByRole(Integer roleId, PageReq pageReq){
+        return null;
+    }
 }

@@ -78,7 +78,7 @@ CREATE TABLE t_rc_role_menu(
   create_time TIMESTAMP WITHOUT TIME ZONE
 );
 
-CREATE TABLE upms.t_rc_user(
+CREATE TABLE t_rc_user(
   user_id SERIAL4 PRIMARY KEY NOT NULL , -- SERIAL4不但会生成主键,而且不需要insert into 带列
   avatar VARCHAR(1024),
   user_name VARCHAR(255),
