@@ -62,6 +62,8 @@ public class UserMapper {
     }
 
     public PageRecords<User> queryByRole(Integer roleId, PageReq pageReq){
-        return null;
+        String sql = "Select tu.* from t_rc_user tu, t_rc_user_role ur where tu.user_id = ur.user_id and roleId=:roleId";
+        ExpressionList<User> expressionList = ebeanServer.findNative(User.class,sql).setParameter("roleId",roleId).where();
+        return MapperUtils.findList(expressionList,pageReq);
     }
 }
