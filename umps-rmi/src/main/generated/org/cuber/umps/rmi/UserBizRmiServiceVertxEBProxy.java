@@ -32,15 +32,16 @@ import java.util.function.Function;
 import io.vertx.serviceproxy.ProxyHelper;
 import io.vertx.serviceproxy.ServiceException;
 import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
-import org.cuber.umps.bo.UserPagingResp;
+import org.cuber.umps.bo.PagingUserResp;
 import org.cuber.umps.bo.UpdateUserResp;
 import org.cuber.umps.rmi.UserBizRmiService;
 import org.cuber.umps.bo.SeekUserResp;
-import org.cuber.umps.bo.UserPagingReq;
 import org.cuber.umps.bo.UserReq;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import org.cuber.umps.bo.PagingUserReq;
 import org.cuber.umps.bo.SeekUserReq;
+import org.cuber.umps.bo.SaveUserResp;
 
 /*
   Generated Proxy code - DO NOT EDIT
@@ -89,7 +90,7 @@ public class UserBizRmiServiceVertxEBProxy implements UserBizRmiService {
   }
 
   @Override
-  public UserBizRmiService pagingUser(UserPagingReq req, Handler<AsyncResult<UserPagingResp>> handler) {
+  public UserBizRmiService pagingUser(PagingUserReq req, Handler<AsyncResult<PagingUserResp>> handler) {
     if (closed) {
     handler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return this;
@@ -102,7 +103,7 @@ public class UserBizRmiServiceVertxEBProxy implements UserBizRmiService {
       if (res.failed()) {
         handler.handle(Future.failedFuture(res.cause()));
       } else {
-        handler.handle(Future.succeededFuture(res.result().body() == null ? null : new UserPagingResp(res.result().body())));
+        handler.handle(Future.succeededFuture(res.result().body() == null ? null : new PagingUserResp(res.result().body())));
                       }
     });
     return this;
@@ -123,6 +124,26 @@ public class UserBizRmiServiceVertxEBProxy implements UserBizRmiService {
         handler.handle(Future.failedFuture(res.cause()));
       } else {
         handler.handle(Future.succeededFuture(res.result().body() == null ? null : new UpdateUserResp(res.result().body())));
+                      }
+    });
+    return this;
+  }
+
+  @Override
+  public UserBizRmiService saveUser(UserReq req, Handler<AsyncResult<SaveUserResp>> handler) {
+    if (closed) {
+    handler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
+      return this;
+    }
+    JsonObject _json = new JsonObject();
+    _json.put("req", req == null ? null : req.toJson());
+    DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
+    _deliveryOptions.addHeader("action", "saveUser");
+    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
+      if (res.failed()) {
+        handler.handle(Future.failedFuture(res.cause()));
+      } else {
+        handler.handle(Future.succeededFuture(res.result().body() == null ? null : new SaveUserResp(res.result().body())));
                       }
     });
     return this;

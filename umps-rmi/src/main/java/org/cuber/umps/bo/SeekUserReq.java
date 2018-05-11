@@ -25,6 +25,16 @@ public class SeekUserReq extends BaseReq{
 
     private String phone;
 
+    private Integer userId;
+
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public String getUserName() {
         return userName;

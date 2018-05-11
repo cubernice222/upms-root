@@ -20,13 +20,13 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.json.JsonArray;
 
 /**
- * Converter for {@link org.cuber.umps.bo.UserPagingReq}.
+ * Converter for {@link org.cuber.umps.bo.PagingUserReq}.
  *
- * NOTE: This class has been automatically generated from the {@link org.cuber.umps.bo.UserPagingReq} original class using Vert.x codegen.
+ * NOTE: This class has been automatically generated from the {@link org.cuber.umps.bo.PagingUserReq} original class using Vert.x codegen.
  */
-public class UserPagingReqConverter {
+public class PagingUserReqConverter {
 
-  public static void fromJson(JsonObject json, UserPagingReq obj) {
+  public static void fromJson(JsonObject json, PagingUserReq obj) {
     if (json.getValue("bizDesc") instanceof String) {
       obj.setBizDesc((String)json.getValue("bizDesc"));
     }
@@ -36,11 +36,8 @@ public class UserPagingReqConverter {
     if (json.getValue("fullName") instanceof String) {
       obj.setFullName((String)json.getValue("fullName"));
     }
-    if (json.getValue("pageNumber") instanceof Number) {
-      obj.setPageNumber(((Number)json.getValue("pageNumber")).intValue());
-    }
-    if (json.getValue("pageSize") instanceof Number) {
-      obj.setPageSize(((Number)json.getValue("pageSize")).intValue());
+    if (json.getValue("pageReq") instanceof JsonObject) {
+      obj.setPageReq(new org.cuber.bo.PageReq((JsonObject)json.getValue("pageReq")));
     }
     if (json.getValue("producer") instanceof String) {
       obj.setProducer((String)json.getValue("producer"));
@@ -53,7 +50,7 @@ public class UserPagingReqConverter {
     }
   }
 
-  public static void toJson(UserPagingReq obj, JsonObject json) {
+  public static void toJson(PagingUserReq obj, JsonObject json) {
     if (obj.getBizDesc() != null) {
       json.put("bizDesc", obj.getBizDesc());
     }
@@ -63,8 +60,9 @@ public class UserPagingReqConverter {
     if (obj.getFullName() != null) {
       json.put("fullName", obj.getFullName());
     }
-    json.put("pageNumber", obj.getPageNumber());
-    json.put("pageSize", obj.getPageSize());
+    if (obj.getPageReq() != null) {
+      json.put("pageReq", obj.getPageReq().toJson());
+    }
     if (obj.getProducer() != null) {
       json.put("producer", obj.getProducer());
     }

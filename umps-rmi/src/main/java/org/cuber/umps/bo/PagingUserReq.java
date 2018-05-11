@@ -2,13 +2,24 @@ package org.cuber.umps.bo;
 
 import io.vertx.codegen.annotations.DataObject;
 import io.vertx.core.json.JsonObject;
-import org.cuber.bo.PagingReq;
+import org.cuber.bo.BaseReq;
+import org.cuber.bo.PageReq;
 
 @DataObject(generateConverter = true)
-public class UserPagingReq extends PagingReq{
+public class PagingUserReq extends BaseReq{
 
     private String fullName;
     private String userName;
+
+    private PageReq pageReq;
+
+    public PageReq getPageReq() {
+        return pageReq;
+    }
+
+    public void setPageReq(PageReq pageReq) {
+        this.pageReq = pageReq;
+    }
 
     public String getFullName() {
         return fullName;
@@ -26,18 +37,19 @@ public class UserPagingReq extends PagingReq{
         this.userName = userName;
     }
 
-    public UserPagingReq() {
+    public PagingUserReq() {
         super();
     }
 
-    public UserPagingReq(JsonObject jsonObject) {
-        UserPagingReqConverter.fromJson(jsonObject,this);
+    public PagingUserReq(JsonObject jsonObject) {
+        PagingUserReqConverter.fromJson(jsonObject,this);
+
     }
 
     @Override
     public JsonObject toJson() {
         JsonObject jsonObject = new JsonObject();
-        UserPagingReqConverter.toJson(this,jsonObject);
+        PagingUserReqConverter.fromJson(jsonObject,this);
         return jsonObject;
     }
 }

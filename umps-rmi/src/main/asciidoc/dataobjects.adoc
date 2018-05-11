@@ -1,5 +1,76 @@
 = Cheatsheets
 
+[[PageReq]]
+== PageReq
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[pageNumber]]`pageNumber`|`Number (int)`|-
+|[[pageSize]]`pageSize`|`Number (int)`|-
+|===
+
+[[PageResult]]
+== PageResult
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[pageNumber]]`pageNumber`|`Number (int)`|-
+|[[pageSize]]`pageSize`|`Number (int)`|-
+|[[total]]`total`|`Number (int)`|-
+|===
+
+[[PagingUserReq]]
+== PagingUserReq
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[bizDesc]]`bizDesc`|`String`|-
+|[[consumer]]`consumer`|`String`|-
+|[[fullName]]`fullName`|`String`|-
+|[[pageReq]]`pageReq`|`link:dataobjects.html#PageReq[PageReq]`|-
+|[[producer]]`producer`|`String`|-
+|[[traceId]]`traceId`|`String`|-
+|[[userName]]`userName`|`String`|-
+|===
+
+[[PagingUserResp]]
+== PagingUserResp
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[consumer]]`consumer`|`String`|-
+|[[pageResult]]`pageResult`|`link:dataobjects.html#PageResult[PageResult]`|-
+|[[producer]]`producer`|`String`|-
+|[[records]]`records`|`Array of link:dataobjects.html#UserBo[UserBo]`|-
+|[[resultDesc]]`resultDesc`|`String`|-
+|===
+
+[[SaveUserResp]]
+== SaveUserResp
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[consumer]]`consumer`|`String`|-
+|[[producer]]`producer`|`String`|-
+|[[resultDesc]]`resultDesc`|`String`|-
+|[[userId]]`userId`|`String`|-
+|===
+
 [[SeekUserReq]]
 == SeekUserReq
 
@@ -15,6 +86,7 @@
 |[[phone]]`phone`|`String`|-
 |[[producer]]`producer`|`String`|-
 |[[traceId]]`traceId`|`String`|-
+|[[userId]]`userId`|`Number (Integer)`|-
 |[[userName]]`userName`|`String`|-
 |[[wechatUserId]]`wechatUserId`|`String`|-
 |===
@@ -70,41 +142,6 @@
 |[[userId]]`userId`|`Number (Integer)`|-
 |[[userName]]`userName`|`String`|-
 |[[wechatUserId]]`wechatUserId`|`String`|-
-|===
-
-[[UserPagingReq]]
-== UserPagingReq
-
-
-[cols=">25%,^25%,50%"]
-[frame="topbot"]
-|===
-^|Name | Type ^| Description
-|[[bizDesc]]`bizDesc`|`String`|-
-|[[consumer]]`consumer`|`String`|-
-|[[fullName]]`fullName`|`String`|-
-|[[pageNumber]]`pageNumber`|`Number (int)`|-
-|[[pageSize]]`pageSize`|`Number (int)`|-
-|[[producer]]`producer`|`String`|-
-|[[traceId]]`traceId`|`String`|-
-|[[userName]]`userName`|`String`|-
-|===
-
-[[UserPagingResp]]
-== UserPagingResp
-
-
-[cols=">25%,^25%,50%"]
-[frame="topbot"]
-|===
-^|Name | Type ^| Description
-|[[consumer]]`consumer`|`String`|-
-|[[pageNumber]]`pageNumber`|`Number (int)`|-
-|[[pageSize]]`pageSize`|`Number (int)`|-
-|[[producer]]`producer`|`String`|-
-|[[records]]`records`|`Array of link:dataobjects.html#UserBo[UserBo]`|-
-|[[resultDesc]]`resultDesc`|`String`|-
-|[[total]]`total`|`Number (int)`|-
 |===
 
 [[UserReq]]

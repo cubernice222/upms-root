@@ -20,10 +20,13 @@ public interface UserBizRmiService {
     UserBizRmiService seekUser(SeekUserReq req, Handler<AsyncResult<SeekUserResp>> handler);
 
     @Fluent
-    UserBizRmiService pagingUser(UserPagingReq req, Handler<AsyncResult<UserPagingResp>> handler);
+    UserBizRmiService pagingUser(PagingUserReq req, Handler<AsyncResult<PagingUserResp>> handler);
 
     @Fluent
     UserBizRmiService updateUser(UserReq req, Handler<AsyncResult<UpdateUserResp>> handler);
 
+    @Fluent
+    UserBizRmiService saveUser(UserReq req, Handler<AsyncResult<SaveUserResp>> handler);
 
+    
 }

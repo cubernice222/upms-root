@@ -1,17 +1,18 @@
 package org.cuber.upms.repo.domain;
 
 import org.cuber.repo.BaseModel;
+import org.cuber.repo.OperateDataModel;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "t_rc_user")
-@SequenceGenerator (name = "USER_ID_SEQ", sequenceName = "t_rc_user_user_id_seq", allocationSize = 1)
-public class User extends BaseModel {
+@SequenceGenerator (name = "SEQ_USER_ID", sequenceName = "t_rc_user_user_id_seq", allocationSize = 1)
+public class User extends OperateDataModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USER_ID")
     private Integer userId;
 
     private String avatar;
@@ -40,10 +41,6 @@ public class User extends BaseModel {
     private String wechatUserId;
 
     private String corpNumber;
-
-    private String status;
-
-    private String operator;
 
 
     public Integer getUserId() {
@@ -150,20 +147,5 @@ public class User extends BaseModel {
         this.corpNumber = corpNumber;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getOperator() {
-        return operator;
-    }
-
-    public void setOperator(String operator) {
-        this.operator = operator;
-    }
 
 }

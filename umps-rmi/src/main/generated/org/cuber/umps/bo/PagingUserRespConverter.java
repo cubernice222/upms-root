@@ -20,21 +20,18 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.json.JsonArray;
 
 /**
- * Converter for {@link org.cuber.umps.bo.UserPagingResp}.
+ * Converter for {@link org.cuber.umps.bo.PagingUserResp}.
  *
- * NOTE: This class has been automatically generated from the {@link org.cuber.umps.bo.UserPagingResp} original class using Vert.x codegen.
+ * NOTE: This class has been automatically generated from the {@link org.cuber.umps.bo.PagingUserResp} original class using Vert.x codegen.
  */
-public class UserPagingRespConverter {
+public class PagingUserRespConverter {
 
-  public static void fromJson(JsonObject json, UserPagingResp obj) {
+  public static void fromJson(JsonObject json, PagingUserResp obj) {
     if (json.getValue("consumer") instanceof String) {
       obj.setConsumer((String)json.getValue("consumer"));
     }
-    if (json.getValue("pageNumber") instanceof Number) {
-      obj.setPageNumber(((Number)json.getValue("pageNumber")).intValue());
-    }
-    if (json.getValue("pageSize") instanceof Number) {
-      obj.setPageSize(((Number)json.getValue("pageSize")).intValue());
+    if (json.getValue("pageResult") instanceof JsonObject) {
+      obj.setPageResult(new org.cuber.bo.PageResult((JsonObject)json.getValue("pageResult")));
     }
     if (json.getValue("producer") instanceof String) {
       obj.setProducer((String)json.getValue("producer"));
@@ -50,17 +47,15 @@ public class UserPagingRespConverter {
     if (json.getValue("resultDesc") instanceof String) {
       obj.setResultDesc((String)json.getValue("resultDesc"));
     }
-    if (json.getValue("total") instanceof Number) {
-      obj.setTotal(((Number)json.getValue("total")).intValue());
-    }
   }
 
-  public static void toJson(UserPagingResp obj, JsonObject json) {
+  public static void toJson(PagingUserResp obj, JsonObject json) {
     if (obj.getConsumer() != null) {
       json.put("consumer", obj.getConsumer());
     }
-    json.put("pageNumber", obj.getPageNumber());
-    json.put("pageSize", obj.getPageSize());
+    if (obj.getPageResult() != null) {
+      json.put("pageResult", obj.getPageResult().toJson());
+    }
     if (obj.getProducer() != null) {
       json.put("producer", obj.getProducer());
     }
@@ -72,6 +67,5 @@ public class UserPagingRespConverter {
     if (obj.getResultDesc() != null) {
       json.put("resultDesc", obj.getResultDesc());
     }
-    json.put("total", obj.getTotal());
   }
 }

@@ -2,16 +2,27 @@ package org.cuber.umps.bo;
 
 import io.vertx.codegen.annotations.DataObject;
 import io.vertx.core.json.JsonObject;
-import org.cuber.bo.PagingResp;
+import org.cuber.bo.BaseResp;
+import org.cuber.bo.PageResult;
 
 import java.util.List;
 
 
 @DataObject(generateConverter = true)
-public class UserPagingResp extends PagingResp {
+public class PagingUserResp extends BaseResp {
 
     private List<UserBo> records;
 
+    private PageResult pageResult;
+
+
+    public PageResult getPageResult() {
+        return pageResult;
+    }
+
+    public void setPageResult(PageResult pageResult) {
+        this.pageResult = pageResult;
+    }
 
     public List<UserBo> getRecords() {
         return records;
@@ -21,18 +32,18 @@ public class UserPagingResp extends PagingResp {
         this.records = records;
     }
 
-    public UserPagingResp() {
+    public PagingUserResp() {
 
     }
 
-    public UserPagingResp(JsonObject jsonObject) {
-        UserPagingRespConverter.fromJson(jsonObject,this);
+    public PagingUserResp(JsonObject jsonObject) {
+        PagingUserRespConverter.fromJson(jsonObject,this);
     }
 
     @Override
     public JsonObject toJson() {
         JsonObject jsonObject = new JsonObject();
-        UserPagingRespConverter.toJson(this,jsonObject);
+        PagingUserRespConverter.toJson(this,jsonObject);
         return jsonObject;
     }
 }

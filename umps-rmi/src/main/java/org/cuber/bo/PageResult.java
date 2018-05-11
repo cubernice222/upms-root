@@ -1,6 +1,11 @@
 package org.cuber.bo;
 
-public abstract class PagingResp extends BaseResp{
+import io.vertx.codegen.annotations.DataObject;
+import io.vertx.core.json.JsonObject;
+import org.cuber.umps.bo.PagingUserRespConverter;
+
+@DataObject(generateConverter = true)
+public class PageResult {
 
     protected int pageNumber;
 
@@ -30,5 +35,18 @@ public abstract class PagingResp extends BaseResp{
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public PageResult() {
+    }
+
+    public PageResult(JsonObject jsonObject) {
+        PageResultConverter.fromJson(jsonObject,this);
+    }
+
+    public JsonObject toJson(){
+        JsonObject jsonObject = new JsonObject();
+        PageResultConverter.toJson(this,jsonObject);
+        return jsonObject;
     }
 }

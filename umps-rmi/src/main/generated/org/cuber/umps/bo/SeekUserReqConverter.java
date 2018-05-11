@@ -48,6 +48,9 @@ public class SeekUserReqConverter {
     if (json.getValue("traceId") instanceof String) {
       obj.setTraceId((String)json.getValue("traceId"));
     }
+    if (json.getValue("userId") instanceof Number) {
+      obj.setUserId(((Number)json.getValue("userId")).intValue());
+    }
     if (json.getValue("userName") instanceof String) {
       obj.setUserName((String)json.getValue("userName"));
     }
@@ -77,6 +80,9 @@ public class SeekUserReqConverter {
     }
     if (obj.getTraceId() != null) {
       json.put("traceId", obj.getTraceId());
+    }
+    if (obj.getUserId() != null) {
+      json.put("userId", obj.getUserId());
     }
     if (obj.getUserName() != null) {
       json.put("userName", obj.getUserName());
