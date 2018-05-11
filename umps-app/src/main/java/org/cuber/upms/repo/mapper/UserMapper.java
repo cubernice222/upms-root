@@ -21,15 +21,15 @@ public class UserMapper {
         ExpressionList<User> expressionList = ebeanServer.find(User.class).where();
         if(Objects.nonNull(queryUser.getUserId())){
             expressionList.idEq(queryUser.getUserId());
-        }else if(StringUtils.isNoneEmpty(queryUser.getEmail())){
+        }else if(StringUtils.isNotEmpty(queryUser.getEmail())){
             expressionList.eq("email",queryUser.getEmail());
-        }else if(StringUtils.isNoneEmpty(queryUser.getPhone())){
+        }else if(StringUtils.isNotEmpty(queryUser.getPhone())){
             expressionList.eq("phone",queryUser.getPhone());
-        }else if(StringUtils.isNoneEmpty(queryUser.getUserName())){
+        }else if(StringUtils.isNotEmpty(queryUser.getUserName())){
             expressionList.eq("userName",queryUser.getUserName());
-        }else if(StringUtils.isNoneEmpty(queryUser.getDingUserId())){
+        }else if(StringUtils.isNotEmpty(queryUser.getDingUserId())){
             expressionList.eq("dingUserId",queryUser.getDingUserId());
-        }else if(StringUtils.isNoneEmpty(queryUser.getWechatUserId())){
+        }else if(StringUtils.isNotEmpty(queryUser.getWechatUserId())){
             expressionList.eq("wechatUserId",queryUser.getWechatUserId());
         }else{
             return null;
@@ -47,6 +47,17 @@ public class UserMapper {
     }
 
     public void queryList(User user, PageReq pageReq){
+        ExpressionList<User> expressionList = ebeanServer.find(User.class).where();
+
+        if(StringUtils.isNotEmpty(user.getUserName())){
+            expressionList.like("userName", "%" + user.getUserName()+ "%");
+        }
+
+        if(StringUtils.isNotEmpty(user.getFullName())){
+            expressionList.like("fullName", "%" + user.getFullName()+ "%");
+        }
+
+
 
     }
 
