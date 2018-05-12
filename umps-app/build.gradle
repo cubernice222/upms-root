@@ -22,7 +22,9 @@ apply plugin: 'io.spring.dependency-management'
 sourceCompatibility = 1.8
 
 repositories {
-    maven{ url 'https://maven.oschina.net/content/groups/public/'}
+    maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+    mavenLocal()
+    mavenCentral()
 }
 
 dependencies {
