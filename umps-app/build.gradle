@@ -12,12 +12,14 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "io.ebean:ebean-gradle-plugin:11.9.1"
+        classpath 'org.jooq:jooq-codegen:3.10.7'
+        classpath 'org.postgresql:postgresql:42.2.2'
+
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'io.ebean'
+apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
@@ -44,15 +46,46 @@ dependencies {
     compile 'org.postgresql:postgresql:42.2.2'
     compile 'io.springfox:springfox-swagger2:2.8.0'
     compile 'io.springfox:springfox-swagger-ui:2.8.0'
-    compile group: 'io.ebean', name: 'ebean', version: '11.15.5'
+    compile 'org.jooq:jooq:3.10.7'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
 }
+def writer = new StringWriter()
+def xml = new groovy.xml.MarkupBuilder(writer)
+        .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.10.0.xsd') {
+    jdbc() {
+        driver('org.postgresql.Driver')
+        url('jdbc:postgresql://localhost:5432/upms')
+        user('upms')
+        password('upms')
+        schema('upms')
+    }
+    generator() {
+        database() {
+        }
 
-ebean {
-    debugLevel = 1 //1 - 9
+        // Watch out for this caveat when using MarkupBuilder with "reserved names"
+        // - https://github.com/jOOQ/jOOQ/issues/4797
+        // - http://stackoverflow.com/a/11389034/521799
+        // - https://groups.google.com/forum/#!topic/jooq-user/wi4S9rRxk4A
+        generate([:]) {
+            pojos true
+            daos true
+            globalSequenceReferences false
+            globalObjectReferences false
+            globalRoutineReferences false
+        }
+        target() {
+            packageName('org.cuber.upms.repo')
+            directory('src/main/java')
+        }
+    }
 }
+
+org.jooq.util.GenerationTool.generate(
+        javax.xml.bind.JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.util.jaxb.Configuration.class)
+)
 
 configurations {
     all*.exclude module: 'spring-boot-starter-logging'
