@@ -40,11 +40,11 @@ public class UserMapper {
         return user;
     }
 
-    public void update(User user)throws Exception{
-        ebeanServer.update(user);
+    public void update(User user) throws Exception{
+        MapperUtils.update(user,ebeanServer);
     }
 
-    public void save(User user){
+    public void save(User user) throws Exception{
         ebeanServer.save(user);
     }
 
@@ -62,8 +62,14 @@ public class UserMapper {
     }
 
     public PageRecords<User> queryByRole(Integer roleId, PageReq pageReq){
-        String sql = "Select tu.* from t_rc_user tu, t_rc_user_role ur where tu.user_id = ur.user_id and roleId=:roleId";
+        String sql = "Select tu.* from t_rc_user tu, t_rc_user_role ur where tu.user_id = ur.user_id and role_id=:roleId and ur.status = 1 and tu.status = 1";
         ExpressionList<User> expressionList = ebeanServer.findNative(User.class,sql).setParameter("roleId",roleId).where();
+        return MapperUtils.findList(expressionList,pageReq);
+    }
+
+    public PageRecords<User> queryByDept(Integer deptId, PageReq pageReq){
+        String sql = "Select tu.* from t_rc_user tu, t_rc_user_dept ur where tu.user_id = ur.user_id and dept_id=:roleId and ur.status = 1 and tu.status = 1";
+        ExpressionList<User> expressionList = ebeanServer.findNative(User.class,sql).setParameter("roleId",deptId).where();
         return MapperUtils.findList(expressionList,pageReq);
     }
 }
