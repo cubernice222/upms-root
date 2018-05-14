@@ -12,7 +12,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath 'org.jooq:jooq-codegen:3.10.7'
+        classpath "io.github.jklingsporn:vertx-jooq-generate:3.1.0"
         classpath 'org.postgresql:postgresql:42.2.2'
 
     }
@@ -38,15 +38,14 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-undertow')
     compile('org.springframework.boot:spring-boot-starter-webflux')
     compile('org.springframework.boot:spring-boot-starter-log4j2')
-    compile('org.springframework.boot:spring-boot-starter-jdbc')
     compile "io.vertx:vertx-core:3.5.1"
     compile 'io.vertx:vertx-rx-java2:3.5.1'
     compile 'io.vertx:vertx-zookeeper:3.5.1'
-    compile 'com.zaxxer:HikariCP:3.1.0'
+    compile 'io.vertx:vertx-mysql-postgresql-client:3.5.1'
     compile 'org.postgresql:postgresql:42.2.2'
     compile 'io.springfox:springfox-swagger2:2.8.0'
     compile 'io.springfox:springfox-swagger-ui:2.8.0'
-    compile 'org.jooq:jooq:3.10.7'
+    compile "io.github.jklingsporn:vertx-jooq-rx-async:3.1.0"
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
@@ -62,23 +61,23 @@ def xml = new groovy.xml.MarkupBuilder(writer)
         schema('upms')
     }
     generator() {
+        name('io.github.jklingsporn.vertx.jooq.generate.VertxGenerator')
         database() {
         }
-
-        // Watch out for this caveat when using MarkupBuilder with "reserved names"
-        // - https://github.com/jOOQ/jOOQ/issues/4797
-        // - http://stackoverflow.com/a/11389034/521799
-        // - https://groups.google.com/forum/#!topic/jooq-user/wi4S9rRxk4A
         generate([:]) {
-            pojos true
-            daos true
-            globalSequenceReferences false
-            globalObjectReferences false
-            globalRoutineReferences false
+            deprecated(false)
+            records(false)
+            interfaces(true)
+            fluentSetters(true)
+            pojos(true)
+            daos(true)
         }
         target() {
             packageName('org.cuber.upms.repo')
             directory('src/main/java')
+        }
+        strategy {
+            name('io.github.jklingsporn.vertx.jooq.generate.rx.AsyncRXVertxGeneratorStrategy')
         }
     }
 }

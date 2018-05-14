@@ -11,7 +11,15 @@ spring:
     password: upms
     url: jdbc:postgresql://localhost:5432/upms
     driver-class-name: org.postgresql.Driver
-    type: com.zaxxer.hikari.HikariDataSource
     username: upms
 zookeeper:
   hosts: 101.132.113.199:2181,101.132.113.199:2182,101.132.113.199:2183
+
+vertx:
+  postgresql:
+    host: 127.0.0.1
+    port: 5432
+    maxPoolSize: 20
+    username: upms
+    password: upms
+
