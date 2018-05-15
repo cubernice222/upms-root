@@ -4,28 +4,34 @@ import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.spi.cluster.ClusterManager;
+import io.vertx.reactivex.ext.asyncsql.AsyncSQLClient;
+import io.vertx.reactivex.ext.asyncsql.PostgreSQLClient;
 import io.vertx.spi.cluster.zookeeper.ZookeeperClusterManager;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DefaultConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 @Component
-public class VertxComp {
+public class VertxComp implements EnvironmentAware{
 
-    @Autowired
     private Environment environment;
+
+    private Vertx vertx;
 
     private static Logger logger = LoggerFactory.getLogger(VertxComp.class);
 
-    private Vertx vertx;
 
     private JsonObject clusterConfig(){
         JsonObject zkConfig = new JsonObject();
@@ -42,8 +48,8 @@ public class VertxComp {
         return new ZookeeperClusterManager(clusterConfig());
     }
 
-    @PostConstruct
-    public void init() throws Exception{
+    @Bean(destroyMethod = "")
+    public Vertx init() throws Exception{
         VertxOptions options = new VertxOptions()
                 .setClustered(true)
                 .setClusterManager(createZkClusterManager());
@@ -57,22 +63,26 @@ public class VertxComp {
                 vertxFuture.completeExceptionally(res.cause());
             }
         });
-        vertx = vertxFuture.get();
+        return vertx = vertxFuture.get();
     }
 
-    @Bean(destroyMethod = "")
-    Vertx vertx() {
-        return vertx;
+    @Bean("defaultJooqConfiguration")
+    public org.jooq.Configuration jooqConfig(){
+        org.jooq.Configuration configuration = new DefaultConfiguration();
+        configuration.set(SQLDialect.POSTGRES);
+        return configuration;
     }
 
-    @PreDestroy
-    void close() throws ExecutionException, InterruptedException {
-        CompletableFuture<Void> future = new CompletableFuture<>();
-        vertx.close(ar -> {
-            logger.info("关闭vert.x组件");
-            future.complete(null);
-        });
-        future.get();
+    @Bean
+    public AsyncSQLClient asyncSQLClient(Vertx vertx){
+        JsonObject clientConfig = new JsonObject();
+        io.vertx.reactivex.core.Vertx vertxReactive = io.vertx.reactivex.core.Vertx.newInstance(vertx);
+        AsyncSQLClient asyncSQLClient = PostgreSQLClient.createShared(vertxReactive,clientConfig);
+        return asyncSQLClient;
     }
 
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
 }

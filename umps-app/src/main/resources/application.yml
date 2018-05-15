@@ -22,4 +22,6 @@ vertx:
     maxPoolSize: 20
     username: upms
     password: upms
-
+jooq:
+  dao:
+    package: org.cuber.upms.repo.tables.daos

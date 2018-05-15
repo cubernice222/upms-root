@@ -2,11 +2,14 @@ package org.cuber.comp;
 
 import io.vertx.reactivex.ext.asyncsql.AsyncSQLClient;
 import org.jooq.Configuration;
+import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
+import org.springframework.core.type.classreading.MetadataReader;
 
+import java.io.IOException;
 import java.util.Set;
 
 
@@ -31,14 +34,28 @@ public class JooqDAOScanner extends ClassPathBeanDefinitionScanner {
 
         holders.stream().forEach(beanDefinitionHolder -> {
             GenericBeanDefinition definition = (GenericBeanDefinition)beanDefinitionHolder.getBeanDefinition();
-            Class originalBeanClass = definition.getBeanClass();
-            definition.getConstructorArgumentValues().addIndexedArgumentValue(0,originalBeanClass);
-            definition.getConstructorArgumentValues().addIndexedArgumentValue(1,asyncSQLClient);
-            definition.getConstructorArgumentValues().addIndexedArgumentValue(2,configuration);
-            definition.setBeanClass(JooqDAOFatoryBean.class);
+            try{
+                Class originalBeanClass = definition.resolveBeanClass(this.getResourceLoader().getClassLoader());
+                definition.getConstructorArgumentValues().addIndexedArgumentValue(0,originalBeanClass);
+                definition.getConstructorArgumentValues().addIndexedArgumentValue(1,asyncSQLClient);
+                definition.getConstructorArgumentValues().addIndexedArgumentValue(2,configuration);
+                definition.setBeanClass(JooqDAOFatoryBean.class);
+            }catch (Exception e){
+
+            }
         });
 
 
         return (this.registry.getBeanDefinitionCount() - beanCountAtScanStart);
+    }
+
+    @Override
+    protected boolean isCandidateComponent(MetadataReader metadataReader) throws IOException {
+        return true;
+    }
+
+    @Override
+    protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
+        return true;
     }
 }
