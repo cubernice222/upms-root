@@ -76,6 +76,11 @@ public class VertxComp implements EnvironmentAware{
     @Bean
     public AsyncSQLClient asyncSQLClient(Vertx vertx){
         JsonObject clientConfig = new JsonObject();
+        clientConfig.put("host",environment.getProperty("vertx.postgresql.host"));
+        clientConfig.put("port",environment.getProperty("vertx.postgresql.port",Integer.class));
+        clientConfig.put("maxPoolSize",environment.getProperty("vertx.postgresql.maxPoolSize",Integer.class));
+        clientConfig.put("username",environment.getProperty("vertx.postgresql.username"));
+        clientConfig.put("password",environment.getProperty("vertx.postgresql.password"));
         io.vertx.reactivex.core.Vertx vertxReactive = io.vertx.reactivex.core.Vertx.newInstance(vertx);
         AsyncSQLClient asyncSQLClient = PostgreSQLClient.createShared(vertxReactive,clientConfig);
         return asyncSQLClient;

@@ -24,16 +24,16 @@ public class JooqTest {
     private static Logger logger = LoggerFactory.getLogger(JooqTest.class);
     @Test
     public void test() throws Exception{
-        CompletableFuture<TRcUser> userFature = new CompletableFuture<>();
+        CompletableFuture<TRcUser> userFuture = new CompletableFuture<>();
         tRcUserDao.findOneById(1).doOnEvent((tRcUser, throwable) -> {
             if(Objects.isNull(throwable)){
                 logger.info("查询到的数据为:{}",tRcUser.get());
-                userFature.complete(tRcUser.get());
+                userFuture.complete(tRcUser.get());
             }else{
                 logger.error("查询发生错误",throwable);
-                userFature.completeExceptionally(throwable);
+                userFuture.completeExceptionally(throwable);
             }
         });
-        userFature.get(2, TimeUnit.SECONDS);
+        userFuture.get(60, TimeUnit.SECONDS);
     }
 }
