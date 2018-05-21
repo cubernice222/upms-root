@@ -1,6 +1,5 @@
 package org.cuber.upms.test;
 
-import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.json.JsonObject;
@@ -9,7 +8,6 @@ import io.vertx.reactivex.ext.asyncsql.AsyncSQLClient;
 import io.vertx.reactivex.ext.asyncsql.PostgreSQLClient;
 import io.vertx.spi.cluster.zookeeper.ZookeeperClusterManager;
 import org.cuber.upms.repo.tables.daos.TRcUserDao;
-import org.cuber.upms.repo.tables.pojos.TRcUser;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DefaultConfiguration;
 import org.junit.Test;
